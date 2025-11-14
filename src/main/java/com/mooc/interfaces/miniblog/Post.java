@@ -3,13 +3,12 @@ package com.mooc.interfaces.miniblog;
 import java.time.LocalDateTime;
 
 public class Post {
-    private final int id;
+    private int id;
     private String title;
     private String content;
     private final LocalDateTime date;
 
-    public Post(int id, String title, String content) {
-        this.id = id;
+    public Post(String title, String content) {
         this.title = title;
         this.content = content;
         this.date = LocalDateTime.now();
@@ -18,6 +17,10 @@ public class Post {
     // Getters and setters
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {

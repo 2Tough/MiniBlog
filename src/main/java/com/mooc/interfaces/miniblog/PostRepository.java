@@ -10,11 +10,11 @@ public class PostRepository {
 
     public PostRepository() {
         this.posts = new ArrayList<>();
-
     }
 
     public Post createPost(String title, String content) {
-        Post post = new Post(nextId++, title, content);
+        Post post = new Post(title, content);
+        post.setId(nextId++);
         posts.add(post);
         return post;
     }
