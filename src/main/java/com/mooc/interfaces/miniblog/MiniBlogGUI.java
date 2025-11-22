@@ -1,6 +1,7 @@
 package com.mooc.interfaces.miniblog;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,16 +22,19 @@ public class MiniBlogGUI extends Application {
     VBox root = new VBox(10);
 
     titleLabel = new Label("MiniBlog");
-    titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold;");
+    titleLabel.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
 
     postButton = new Button("Create post");
     listButton = new Button("List posts");
+    postButton.setStyle("-fx-font-size: 16px;");
 
     postsContainer = new VBox(5);
 
     root.getChildren().addAll(titleLabel, postButton, listButton, postsContainer);
 
-    Scene scene = new Scene(root);
+    root.setAlignment(Pos.CENTER);
+
+    Scene scene = new Scene(root, 600,400);
     stage.setTitle("MiniBlog");
     stage.setScene(scene);
 
@@ -60,7 +64,7 @@ public class MiniBlogGUI extends Application {
             if(title != null || content != null) {
                 repository.createPost(title, content);
                 postsContainer.getChildren().clear();
-                listPosts();
+
             }
         });
 
@@ -69,6 +73,18 @@ public class MiniBlogGUI extends Application {
     }
 
     private void listPosts() {
+        postsContainer.getChildren().clear();
+
+        repository.getAllPosts().forEach(post -> {
+            System.out.println(post.getTitle());
+            System.out.println(post.getContent());
+            Label titleLabel = new Label(post.getTitle());
+            Label contentLabel = new Label(post.getContent());
+
+            postsContainer.getChildren().addAll(titleLabel, contentLabel);
+        });
+
+
 
     }
 
